@@ -64,3 +64,11 @@ Route::get('/create',function (){
 })->name('create');
 
 Route::get('/produk','barangsController@index');
+
+Route::get('/produk/show','barangsController@show');
+
+Route::get('/halaman',function(){
+	$title ='HarryPotter';
+	$konten = 'Harry potter and masha and the bear deathly hallows: part 2';
+	return view('konten.halaman',compact('title','konten'));
+});
