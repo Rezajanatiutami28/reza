@@ -76,3 +76,18 @@ Route::get('/halaman',function(){
 Route::get('/pelanggan','pelangganController@index');
 
 Route::resource('produk','produkController');
+
+Route::get('/store','produkController@store');
+
+Route::get('/update','produkController@update');
+
+Route::get('/delete','produkController@delete');
+
+Route::get('/kategori','kategoriController@index');
+
+Route::get('/kategori/store','kategoriController@store');
+
+Route::get('/kategori/update','kategoriController@update');
+
+Route::get('/kategori/delete','kategoriController@delete');
+

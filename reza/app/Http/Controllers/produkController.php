@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
 
 class produkController extends Controller
 {
@@ -13,8 +14,9 @@ class produkController extends Controller
      */
     public function index()
     {
-        $produk = ['Meja','Kursi','Buku','Lampu'];
-        return view ('produk.index',compact('produk'));
+        $produk = DB::table('barangs')->get()->join('kategori','produks.id_kategori','=','kategori.id')->get();  
+
+        return view('produk/index',compact('produk')); 
     }
 
     /**
@@ -33,9 +35,17 @@ class produkController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
-        //
+        DB::table('barangs') 
+        ->insert([ 
+            'nama' => 'Lampu', 
+            'id_kategori' => 1, 
+            'qty' => 14, 
+            'harga_beli' => 40000,
+            'harga_jual' => 60000, 
+            ]);
+        echo "Data Berhasil Ditambah";
     }
 
     /**
@@ -67,9 +77,15 @@ class produkController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update()
     {
-        //
+        DB::table('barangs')->where('id',3) 
+        ->update([ 'nama' => 'Bola Lampu', 
+            'qty' => 20, 
+            'harga_beli' => 45000, 
+            'harga_jual' => 55000, ]);  
+
+echo "Data Berhasil Diperbaharui"; 
     }
 
     /**
@@ -82,4 +98,12 @@ class produkController extends Controller
     {
         //
     }
+
+    
+    public function delete()
+{ 
+    DB::table('barangs')->where('id',3)->delete(); 
+    echo "Data Berhasil Dihapus"; 
+}
+
 }
